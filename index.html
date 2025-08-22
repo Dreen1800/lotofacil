@@ -12,9 +12,9 @@
 // ==================================================
 const config = {
     useInstantPixel: false, // true = mais rápido, false = coleta completa (RECOMENDADO deixar "false")
-    productName: "lotosorte", // Nome do produto (ex: 'Curso Facebook Ads')
+    productName: "acertamais", // Nome do produto (ex: 'Curso Facebook Ads')
     // NÃO ESTAMOS MAIS ENVIANDO O ID DO PRODUTO
-    apiURL: "https://api.promovoo.app/", // URL da sua API (subdomínio da API)
+    apiURL: "https://api.promovoo.app", // URL da sua API (subdomínio da API)
     origin: "utm_source", // UTM que sua plataforma de vendas aceita (Exemplo: Hotmart usa 'xcod', as demais usam 'src')
     
     // ==============================================
@@ -22,7 +22,7 @@ const config = {
     // ==============================================
     isProduct: true, // true = É um infoproduto/encapsulado, false = não é um infoproduto/encapsulado
 
-    productValue: [ 37 ], // Valor do seu infoproduto e caso tenha mais de uma oferta/planos colocar assim: [ 9.90, 19.90 ]
+    productValue: [ 97 ], // Valor do seu infoproduto e caso tenha mais de uma oferta/planos colocar assim: [ 9.90, 19.90 ]
    // Se não houver valor ou algo do tipo, pode deixar como productValue : " ",
 
    productCurrency: "BRL", // Qual o tipo da moeda (ex: "BRL", "USD")
@@ -70,7 +70,7 @@ function getCookie(name) {
 function getLongExpires() {
     const date = new Date();
     date.setFullYear(date.getFullYear() + 100);
-    return `expires=${date.toUTCString()}; path=/;`;
+    return `expires=${date.toUTCString()}; path=/`;
 }
 
 function generateUUID() {
@@ -84,7 +84,7 @@ function generateUUID() {
 const eventSent = {};
 
 async function sendEvent(eventType, data = {}) {
-    const eventSent = window._eventSent || (window._eventSent = {});
+    const eventSent = window.__eventSent || (window.__eventSent = {});
     if (["ViewContent", "AddToWishlist", "AddToCart", "Contact", "Scroll_25", "Scroll_50", "Scroll_75", "Scroll_90", "Timer_1min"].includes(eventType)) {
         if (eventSent[eventType]) return;
         eventSent[eventType] = true;
@@ -209,7 +209,7 @@ function updateUserDataFromForm() {
         ...(fn && { fn }),
         ...(ln && { ln }),
         ...(em && { em }),
-        ...(_ph && { _ph })
+        ...(_ph && { ph: _ph })
     };
 }
 
@@ -220,7 +220,7 @@ if (!userId) {
     userId = generateUUID();
     const date = new Date();
     date.setFullYear(date.getFullYear() + 100); // Expira em 100 anos
-    document.cookie = `userId=${userId}; expires=${date.toUTCString()}; path=/;`;
+    document.cookie = `userId=${userId}; expires=${date.toUTCString()}; path=/`;
 }
 	
 (async () => {
@@ -239,7 +239,7 @@ if (!userId) {
         ...(fn && { fn }),
         ...(ln && { ln }),
         ...(em && { em }),
-        ...(_ph && { _ph })
+        ...(_ph && { ph: _ph })
     };
 
     !function(f,b,e,v,n,t,s)
@@ -250,7 +250,7 @@ if (!userId) {
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 1092078159607034, userData);
+    fbq('init', '1123492762995806', userData);
 
     if (config.useInstantPixel)
         await instantPixel();

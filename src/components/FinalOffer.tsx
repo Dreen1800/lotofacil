@@ -291,7 +291,7 @@ const FinalOffer: React.FC = () => {
       </div>
 
       <a 
-        href="https://pay.kirvano.com/1eb04b53-f107-41b3-9d99-d68723b0bc39"
+        href="https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68"
         target="_blank"
         rel="noopener noreferrer"
         className="block mb-8"
@@ -335,7 +335,7 @@ const FinalOffer: React.FC = () => {
       </div>
 
       <a 
-        href="https://pay.kirvano.com/1eb04b53-f107-41b3-9d99-d68723b0bc39"
+        href="https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68"
         target="_blank"
         rel="noopener noreferrer"
         className="block mb-8"
