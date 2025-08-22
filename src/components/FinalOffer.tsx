@@ -118,6 +118,27 @@ const FinalOffer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  // Load ConvertAI video players
+  useEffect(() => {
+    // Load first video player script
+    const script1 = document.createElement("script");
+    script1.src = "https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/68a7d33089952a2b325b85b8/v4/player.js";
+    script1.async = true;
+    document.head.appendChild(script1);
+
+    // Load second video player script
+    const script2 = document.createElement("script");
+    script2.src = "https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/68a7d33589952a2b325b85c7/v4/player.js";
+    script2.async = true;
+    document.head.appendChild(script2);
+
+    // Cleanup function to remove scripts when component unmounts
+    return () => {
+      document.head.removeChild(script1);
+      document.head.removeChild(script2);
+    };
+  }, []);
+
   return (
     <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-2xl mx-auto text-center animate-scaleIn mt-4">
       <div className="mb-6">
@@ -188,26 +209,12 @@ const FinalOffer: React.FC = () => {
         <h3 className="text-lg md:text-xl font-bold mb-4" style={{ color: '#8f339a' }}>Usuários da AcertaFácil dizem:</h3>
 
         <div className="mb-8 space-y-4">
-          <iframe 
-            src="https://fast.wistia.net/embed/iframe/v80tti8rrx" 
-            allowTransparency={true} 
-            frameBorder="0" 
-            scrolling="no" 
-            className="wistia_embed w-full rounded-lg shadow-md" 
-            name="wistia_embed" 
-            allowFullScreen 
-            style={{width:'100%', height:'auto', aspectRatio:'16/9'}}
-          />
-          <iframe 
-            src="https://fast.wistia.net/embed/iframe/fsa0n5tctj" 
-            allowTransparency={true} 
-            frameBorder="0" 
-            scrolling="no" 
-            className="wistia_embed w-full rounded-lg shadow-md" 
-            name="wistia_embed" 
-            allowFullScreen 
-            style={{width:'100%', height:'auto', aspectRatio:'16/9'}}
-          />
+          <div className="w-full rounded-lg shadow-md">
+            <vturb-smartplayer id="vid-68a7d33089952a2b325b85b8" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
+          </div>
+          <div className="w-full rounded-lg shadow-md">
+            <vturb-smartplayer id="vid-68a7d33589952a2b325b85c7" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
+          </div>
         </div>
 
         <div className="bg-gray-50 rounded-xl p-6 mb-8">
