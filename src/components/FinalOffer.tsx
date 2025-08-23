@@ -12,6 +12,7 @@ const FinalOffer: React.FC = () => {
   const [currentPlatformImage, setCurrentPlatformImage] = useState(0);
   const [currentResultImage, setCurrentResultImage] = useState(0);
   const [remainingSpots, setRemainingSpots] = useState(126);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   
   const totalEarnings = roundResults
     .filter((_, index) => index >= 2)
@@ -111,6 +112,28 @@ const FinalOffer: React.FC = () => {
 
   const prevPlatformImage = () => {
     setCurrentPlatformImage((prev) => (prev - 1 + platformImages.length) % platformImages.length);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsButtonClicked(true);
+    
+    try {
+      const link = document.createElement('a');
+      link.href = "https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Erro ao abrir link:', error);
+      // Fallback: tenta window.open mesmo assim
+      window.open("https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68", "_blank");
+    }
+    
+    // Reset feedback visual após 2 segundos
+    setTimeout(() => setIsButtonClicked(false), 2000);
   };
 
   // Scroll to top when component mounts
@@ -257,11 +280,13 @@ const FinalOffer: React.FC = () => {
             <p className="text-gray-600">ou R$37,00 no pix</p>
           </div>
           
-          <button 
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200 w-full max-w-sm"
+          <Button 
+            onClick={handleButtonClick}
+            className={`text-lg w-full max-w-sm ${isButtonClicked ? 'animate-pulse' : ''}`}
+            variant="success"
           >
-            Garantir meu acesso a ACERTA FÁCIL
-          </button>
+            {isButtonClicked ? '✅ Garantindo acesso...' : 'Garantir meu acesso a ACERTA FÁCIL'}
+          </Button>
         </div>
       </div>
 
@@ -297,19 +322,15 @@ const FinalOffer: React.FC = () => {
         </p>
       </div>
 
-      <a 
-        href="https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block mb-8"
-      >
+      <div className="mb-8">
         <Button 
-          className="w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4"
+          onClick={handleButtonClick}
+          className={`w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4 ${isButtonClicked ? 'animate-pulse' : ''}`}
           variant="success"
         >
-          QUERO ACESSAR A ACERTAFÁCIL!
+          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A ACERTAFÁCIL!'}
         </Button>
-      </a>
+      </div>
       
       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm mb-8">
         <p className="text-yellow-800 mb-2">
@@ -341,19 +362,15 @@ const FinalOffer: React.FC = () => {
         </div>
       </div>
 
-      <a 
-        href="https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block mb-8"
-      >
+      <div className="mb-8">
         <Button 
-          className="w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4"
+          onClick={handleButtonClick}
+          className={`w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4 ${isButtonClicked ? 'animate-pulse' : ''}`}
           variant="success"
         >
-          QUERO ACESSAR A ACERTAFÁCIL!
+          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A ACERTAFÁCIL!'}
         </Button>
-      </a>
+      </div>
 
       <FAQ />
     </div>
