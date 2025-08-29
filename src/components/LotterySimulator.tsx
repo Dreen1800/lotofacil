@@ -319,15 +319,50 @@ const LotterySimulator: React.FC = () => {
       {notification.show && (
         <>
           {/* Background blur overlay */}
-          <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40" />
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md z-40" />
           
           {/* Popup modal */}
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-red-500 w-full max-w-lg h-auto min-h-[40vh] flex flex-col justify-center items-center p-8 animate-scaleIn">
-              <div className="text-6xl mb-6">❌</div>
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-red-600 mb-4">Você teve 10 acertos</h2>
-                <p className="text-lg text-gray-700 mb-6">Não foi dessa vez, tente na próxima rodada!</p>
+            <div className="bg-gradient-to-br from-white via-red-50 to-red-100 rounded-3xl shadow-2xl border-4 border-red-400 w-full max-w-lg min-h-[45vh] flex flex-col justify-center items-center p-10 animate-scaleIn relative overflow-hidden">
+              {/* Decorative background pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-4 left-4 w-8 h-8 bg-red-400 rounded-full"></div>
+                <div className="absolute top-12 right-6 w-6 h-6 bg-red-300 rounded-full"></div>
+                <div className="absolute bottom-8 left-8 w-10 h-10 bg-red-200 rounded-full"></div>
+                <div className="absolute bottom-4 right-4 w-4 h-4 bg-red-400 rounded-full"></div>
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10 text-center">
+                {/* Icon container */}
+                <div className="mb-8 relative">
+                  <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-4 border-red-300">
+                    <div className="text-6xl">❌</div>
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full animate-bounce"></div>
+                </div>
+                
+                {/* Text content */}
+                <div className="space-y-4">
+                  <h2 className="text-3xl font-black text-red-700 mb-2 tracking-tight">
+                    Você teve 10 acertos
+                  </h2>
+                  <div className="w-20 h-1 bg-gradient-to-r from-red-400 to-red-600 mx-auto rounded-full mb-4"></div>
+                  <p className="text-xl text-gray-700 font-medium leading-relaxed">
+                    Não foi dessa vez,<br />
+                    <span className="text-red-600 font-semibold">tente na próxima rodada!</span>
+                  </p>
+                </div>
+                
+                {/* Loading indicator */}
+                <div className="mt-8">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-2">Preparando próxima rodada...</p>
+                </div>
               </div>
             </div>
           </div>
