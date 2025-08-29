@@ -149,7 +149,7 @@ const LotterySimulator: React.FC = () => {
     <div className="bg-white rounded-2xl shadow-2xl p-6 mx-auto animate-fadeIn">
       <div className="mb-4 text-center">
         <img 
-          src="/assets/loto.webp" 
+          src="https://ynmtotqvrymcrizsofdx.supabase.co/storage/v1/object/public/imagens/products/loto.webp" 
           alt="Simulador da LotoSorte" 
           className="w-full mb-2 h-auto rounded-lg"
         />
