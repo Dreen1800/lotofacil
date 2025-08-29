@@ -12,7 +12,7 @@ const TransitionPopup: React.FC = () => {
   return (
     <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto text-center animate-scaleIn">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Anton, sans-serif', color: '#8f339a' }}>AcertaFácil</h1>
+        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Anton, sans-serif', color: '#8f339a' }}>LotoSorte</h1>
         <div className="flex justify-center mb-4">
           <div className="w-20 h-1 bg-yellow-400 rounded"></div>
         </div>
@@ -20,7 +20,7 @@ const TransitionPopup: React.FC = () => {
 
       <div className="mb-8">
         <div className="text-lg font-bold mb-4" style={{ color: '#8f339a' }}>
-          🍀 Conheça agora a inteligência artificial da AcertaFácil!
+          🍀 Conheça agora a inteligência artificial da LotoSorte!
         </div>
         
         <p className="text-gray-700 mb-4">
@@ -59,7 +59,7 @@ const TransitionPopup: React.FC = () => {
         </p>
         
         <p className="text-gray-700 mb-6">
-          Com a AcertaFácil, <span className="font-bold" style={{ color: '#8f339a' }}>+12 mil pessoas</span> já estão faturando mais de <span className="font-bold" style={{ color: '#8f339a' }}>R$3.000</span> todas as semanas!
+          Com a LotoSorte, <span className="font-bold" style={{ color: '#8f339a' }}>+12 mil pessoas</span> já estão faturando mais de <span className="font-bold" style={{ color: '#8f339a' }}>R$3.000</span> todas as semanas!
         </p>
       </div>
 

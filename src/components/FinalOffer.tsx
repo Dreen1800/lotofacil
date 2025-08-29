@@ -2,46 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { useGameContext } from '../contexts/GameContext';
 import Button from './ui/Button';
 import FAQ from './FAQ';
-import { formatCurrency } from '../utils/lotteryUtils';
 import { Shield } from 'lucide-react';
 
 const FinalOffer: React.FC = () => {
   const { roundResults } = useGameContext();
-  const [displayAmount, setDisplayAmount] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentPlatformImage, setCurrentPlatformImage] = useState(0);
   const [currentResultImage, setCurrentResultImage] = useState(0);
   const [remainingSpots, setRemainingSpots] = useState(126);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  
-  const totalEarnings = roundResults
-    .filter((_, index) => index >= 2)
-    .reduce((sum, result) => sum + result.winnings, 0);
 
   const testimonials = [
     {
       name: "Roberto Santos",
       city: "São Paulo, SP",
       image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
-      text: "Usei a AcertaFácil e acertei 14 pontos na segunda semana! Melhor investimento que já fiz."
+      text: "Usei a LotoSorte e acertei 14 pontos na segunda semana! Melhor investimento que já fiz."
     },
     {
       name: "Ana Clara",
       city: "Rio de Janeiro, RJ",
       image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-      text: "Estava cansada de gastar dinheiro com a Lotofácil e nunca ganhar nada, mas agora estou muito satisfeita, chegando em R$4.000 faturados!"
+      text: "Estava cansada de gastar dinheiro com a LotoSorte e nunca ganhar nada, mas agora estou muito satisfeita, chegando em R$4.000 faturados!"
     },
     {
       name: "Carlos Eduardo",
       city: "Belo Horizonte, MG",
       image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg",
-      text: "Comecei a usar a AcertaFácil há 3 semanas e já acertei 13 pontos duas vezes! A inteligência artificial realmente funciona."
+      text: "Comecei a usar a LotoSorte há 3 semanas e já acertei 13 pontos duas vezes! A inteligência artificial realmente funciona."
     },
     {
       name: "Maria Fernanda",
       city: "Salvador, BA",
       image: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
-      text: "Nunca imaginei que seria possível ganhar na loteria com tanta frequência. A AcertaFácil mudou minha vida financeira!"
+      text: "Nunca imaginei que seria possível ganhar na loteria com tanta frequência. A LotoSorte mudou minha vida financeira!"
     }
   ];
 
@@ -54,29 +48,9 @@ const FinalOffer: React.FC = () => {
   const resultImages = [
     "https://i.imgur.com/rtlZVel.jpeg",
     "https://i.imgur.com/8u2vlSN.jpeg",
-    "https://i.imgur.com/vTvSlAZ.jpeg"
+    "https://i.imgur.com/bvSlAZ.jpeg"
   ];
 
-  useEffect(() => {
-    const duration = 2000;
-    const steps = 60;
-    const increment = totalEarnings / steps;
-    let current = 0;
-    let step = 0;
-
-    const timer = setInterval(() => {
-      if (step < steps) {
-        current += increment;
-        setDisplayAmount(current);
-        step++;
-      } else {
-        setDisplayAmount(totalEarnings);
-        clearInterval(timer);
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [totalEarnings]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -120,7 +94,7 @@ const FinalOffer: React.FC = () => {
     
     try {
       const link = document.createElement('a');
-      link.href = "https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68";
+      link.href = "https://pay.kirvano.com/";
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       document.body.appendChild(link);
@@ -129,7 +103,7 @@ const FinalOffer: React.FC = () => {
     } catch (error) {
       console.error('Erro ao abrir link:', error);
       // Fallback: tenta window.open mesmo assim
-      window.open("https://pay.kirvano.com/0d692dcf-aa98-4afb-b3c9-b8631a781d68", "_blank");
+      window.open("https://pay.kirvano.com/", "_blank");
     }
     
     // Reset feedback visual após 2 segundos
@@ -141,51 +115,17 @@ const FinalOffer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  // Load ConvertAI video players
-  useEffect(() => {
-    // Load first video player script
-    const script1 = document.createElement("script");
-    script1.src = "https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/68a7d33089952a2b325b85b8/v4/player.js";
-    script1.async = true;
-    document.head.appendChild(script1);
 
-    // Load second video player script
-    const script2 = document.createElement("script");
-    script2.src = "https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/68a7d33589952a2b325b85c7/v4/player.js";
-    script2.async = true;
-    document.head.appendChild(script2);
-
-    // Cleanup function to remove scripts when component unmounts
-    return () => {
-      document.head.removeChild(script1);
-      document.head.removeChild(script2);
-    };
-  }, []);
 
   return (
     <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-2xl mx-auto text-center animate-scaleIn mt-4">
-      <div className="mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Anton, sans-serif', color: '#8f339a' }}>Você foi incrível!</h1>
-        <p className="text-base md:text-lg text-gray-600">
-          Você viu como a ajuda da inteligência artificial seus resultados foram bem superiores?
-        </p>
-      </div>
-
-      <div className="p-6 rounded-xl mb-4" style={{ backgroundColor: '#f8f4f6' }}>
-        <p className="text-lg md:text-xl mb-2" style={{ color: '#8f339a' }}>Com nossa IA, você ganhou:</p>
-        <p className="text-3xl md:text-4xl font-bold mb-2" style={{ color: '#8f339a' }}>
-          {formatCurrency(displayAmount)}
-        </p>
-        <p style={{ color: '#8f339a' }}>em apenas 2 rodadas!</p>
-      </div>
-
       <p className="text-base md:text-lg font-semibold mb-8" style={{ color: '#8f339a' }}>
         Imagine jogar todos os dias com a ajuda da nossa IA?
       </p>
 
       <div className="mb-8">
         <p className="text-base md:text-lg text-gray-700 mb-6">
-          A AcertaFácil é uma plataforma de análise inteligente que utiliza IA para cruzar dados 
+          A LotoSorte é uma plataforma de análise inteligente que utiliza IA para cruzar dados 
           de mais de 1.500 concursos anteriores e gerar jogos com alto potencial de acerto.
         </p>
 
@@ -195,7 +135,7 @@ const FinalOffer: React.FC = () => {
           <div className="relative rounded-lg">
             <img 
               src={platformImages[currentPlatformImage]} 
-              alt={`Plataforma AcertaFácil - Tela ${currentPlatformImage + 1}`}
+              alt={`Plataforma LotoSorte - Tela ${currentPlatformImage + 1}`}
               className="w-full h-auto rounded-lg shadow-md"
             />
             <button
@@ -229,16 +169,7 @@ const FinalOffer: React.FC = () => {
           </div>
         </div>
 
-        <h3 className="text-lg md:text-xl font-bold mb-4" style={{ color: '#8f339a' }}>Usuários da AcertaFácil dizem:</h3>
-
-        <div className="mb-8 space-y-4">
-          <div className="w-full rounded-lg shadow-md">
-            <vturb-smartplayer id="vid-68a7d33089952a2b325b85b8" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-          </div>
-          <div className="w-full rounded-lg shadow-md">
-            <vturb-smartplayer id="vid-68a7d33589952a2b325b85c7" style={{display: 'block', margin: '0 auto', width: '100%'}}></vturb-smartplayer>
-          </div>
-        </div>
+        <h3 className="text-lg md:text-xl font-bold mb-4" style={{ color: '#8f339a' }}>Usuários da LotoSorte dizem:</h3>
 
         <div className="bg-gray-50 rounded-xl p-6 mb-8">
           <div className="relative overflow-hidden">
@@ -270,7 +201,7 @@ const FinalOffer: React.FC = () => {
           <div className="bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-4">
             Oferta exclusiva
           </div>
-          <h3 className="text-2xl font-bold text-black mb-2">Inteligência artificial Acerta Fácil</h3>
+          <h3 className="text-2xl font-bold text-black mb-2">Inteligência artificial LotoSorte</h3>
           
           <div className="bg-white rounded-lg p-6 mb-4 mx-auto max-w-sm">
             <p className="text-gray-700 text-lg mb-2">Garanta o seu acesso por apenas</p>
@@ -285,7 +216,7 @@ const FinalOffer: React.FC = () => {
             className={`text-lg w-full max-w-sm ${isButtonClicked ? 'animate-pulse' : ''}`}
             variant="success"
           >
-            {isButtonClicked ? '✅ Garantindo acesso...' : 'Garantir meu acesso a ACERTA FÁCIL'}
+            {isButtonClicked ? '✅ Garantindo acesso...' : 'Garantir meu acesso a LOTOSORTE'}
           </Button>
         </div>
       </div>
@@ -315,7 +246,7 @@ const FinalOffer: React.FC = () => {
 
       <div className="mb-6 text-center">
         <p className="text-gray-600 mb-4 text-xs md:text-sm text-left">
-          *Para participar da AcertaFácil é necessário a contribuição de uma pequena taxa de inscrição para colaborar com os custos do nosso servidor.
+          *Para participar da LotoSorte é necessário a contribuição de uma pequena taxa de inscrição para colaborar com os custos do nosso servidor.
         </p>
         <p className="mb-6 text-base md:text-lg font-bold text-center p-4 rounded-lg border-2" style={{ color: '#8f339a', backgroundColor: '#f8f4f6', borderColor: '#d8bdd1' }}>
           👇 Finalize sua inscrição abaixo!
@@ -328,13 +259,13 @@ const FinalOffer: React.FC = () => {
           className={`w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4 ${isButtonClicked ? 'animate-pulse' : ''}`}
           variant="success"
         >
-          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A ACERTAFÁCIL!'}
+          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A LotoSorte!'}
         </Button>
       </div>
       
       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm mb-8">
         <p className="text-yellow-800 mb-2">
-          Garanta sua vaga na AcertaFácil! Ao zerar o contador as novas vagas serão automaticamente encerradas.
+          Garanta sua vaga na LotoSorte! Ao zerar o contador as novas vagas serão automaticamente encerradas.
         </p>
         <p className="text-yellow-900 font-bold text-lg">
           🔥 Restam apenas <span className="text-red-600">{remainingSpots}</span> vagas!
@@ -368,7 +299,7 @@ const FinalOffer: React.FC = () => {
           className={`w-full text-sm md:text-lg animate-gentlePulse whitespace-nowrap py-4 ${isButtonClicked ? 'animate-pulse' : ''}`}
           variant="success"
         >
-          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A ACERTAFÁCIL!'}
+          {isButtonClicked ? '✅ Garantindo acesso...' : 'QUERO ACESSAR A LOTOSORTE!'}
         </Button>
       </div>
 

@@ -9,7 +9,7 @@ const NotificationOverlay: React.FC = () => {
   useEffect(() => {
     // Show messages for certain stage transitions
     if (stage === 'regular-simulation' && round === 1) {
-      setCurrentMessage('Tente acertar os números da Lotofácil!');
+      setCurrentMessage('Tente acertar os números da LotoSorte!');
       setShowMessage(true);
     } else if (stage === 'ai-simulation' && round === 1) {
       setCurrentMessage('Veja o poder da IA para prever os números!');

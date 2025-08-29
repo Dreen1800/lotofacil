@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import WelcomePopup from './WelcomePopup';
 import LotterySimulator from './LotterySimulator';
 import TransitionPopup from './TransitionPopup';
+import ResultsSummary from './ResultsSummary';
 import FinalOffer from './FinalOffer';
 import NotificationOverlay from './NotificationOverlay';
 import { useGameContext } from '../contexts/GameContext';
@@ -16,7 +17,7 @@ const GameContainer: React.FC = () => {
         setStage('transition');
         resetSelections();
       } else if (stage === 'ai-simulation') {
-        setStage('final-offer');
+        setStage('results-summary');
       }
       setRound(1);
     }
@@ -31,6 +32,8 @@ const GameContainer: React.FC = () => {
         return <LotterySimulator key={`${stage}-${round}`} />;
       case 'transition':
         return <TransitionPopup />;
+      case 'results-summary':
+        return <ResultsSummary />;
       case 'final-offer':
         return <FinalOffer />;
       default:

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { generateLotteryNumbers, calculateWinnings } from '../utils/lotteryUtils';
 
-export type GameStage = 'welcome' | 'regular-simulation' | 'transition' | 'ai-simulation' | 'final-offer';
+export type GameStage = 'welcome' | 'regular-simulation' | 'transition' | 'ai-simulation' | 'results-summary' | 'final-offer';
 
 interface GameContextType {
   stage: GameStage;

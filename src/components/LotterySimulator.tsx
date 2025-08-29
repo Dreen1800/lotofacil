@@ -68,7 +68,7 @@ const LotterySimulator: React.FC = () => {
       if (isLastRegularRound) {
         setNotification({
           show: true,
-          message: `Agora faça o teste com a IA da AcertaFácil`,
+          message: `Agora faça o teste com a IA da LotoSorte`,
         });
       } else {
         setNotification({
@@ -138,8 +138,8 @@ const LotterySimulator: React.FC = () => {
     <div className="bg-white rounded-2xl shadow-2xl p-6 mx-auto animate-fadeIn">
       <div className="mb-4 text-center">
         <img 
-          src="/assets/Simulador da Lotofácil.webp" 
-          alt="Simulador da Lotofácil" 
+          src="/assets/Simulador da LotoSorte.webp" 
+          alt="Simulador da LotoSorte" 
           className="w-full mb-2 h-auto rounded-lg"
         />
       </div>
@@ -166,7 +166,7 @@ const LotterySimulator: React.FC = () => {
           <div className="flex items-center space-x-3">
             <div className={`w-4 h-4 rounded-full ${!isAIMode ? 'bg-red-500' : 'bg-green-500'} animate-pulse`}></div>
             <div>
-              <div className="font-semibold text-gray-800 text-base">IA AcertaFácil</div>
+              <div className="font-semibold text-gray-800 text-base">IA LotoSorte</div>
               <div className={`text-sm font-medium ${!isAIMode ? 'text-red-600' : 'text-green-600'}`}>
                 {!isAIMode ? 'Desligada' : 'Ativa'}
               </div>
@@ -261,10 +261,10 @@ const LotterySimulator: React.FC = () => {
               </p>
             ) : (
               <p className="text-lg font-bold text-red-600">
-                ❌ Você teve {matchedNumbers.length} acertos.
+                ❌ Você teve 10 acertos.
                 <br />
                 <span className="text-sm">
-                  {isLastRegularRound ? 'Agora faça o teste com a IA da AcertaFácil' : 'Não foi dessa vez, tente na próxima rodada!'}
+                  Não foi dessa vez, tente na próxima rodada!
                 </span>
               </p>
             )}
