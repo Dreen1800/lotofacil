@@ -49,10 +49,21 @@ const LotterySimulator: React.FC = () => {
       playCashRegisterSound();
       setShowMoneyEffect(true);
       setTimeout(() => setShowMoneyEffect(false), 3000);
+      checkResult();
+      setShowResults(true);
+    } else {
+      // For regular simulation, show popup and then go to next round
+      checkResult();
+      setNotification({
+        show: true,
+        message: "result"
+      });
+      
+      // Auto advance to next round after showing popup
+      setTimeout(() => {
+        handleNextRound();
+      }, 3500);
     }
-    
-    checkResult();
-    setShowResults(true);
   };
 
   const handleNextRound = () => {
@@ -138,7 +149,7 @@ const LotterySimulator: React.FC = () => {
     <div className="bg-white rounded-2xl shadow-2xl p-6 mx-auto animate-fadeIn">
       <div className="mb-4 text-center">
         <img 
-          src="/assets/Simulador da LotoSorte.webp" 
+          src="/assets/loto.webp" 
           alt="Simulador da LotoSorte" 
           className="w-full mb-2 h-auto rounded-lg"
         />
@@ -225,7 +236,7 @@ const LotterySimulator: React.FC = () => {
             VERIFICAR RESULTADO
           </Button>
         </>
-      ) : (
+      ) : (showResults && isAIMode) ? (
         <>
           <div className="mb-6">
             <p className="text-lg font-bold mb-3 text-center">
@@ -278,12 +289,49 @@ const LotterySimulator: React.FC = () => {
             {round < totalRounds ? 'PRÓXIMA RODADA' : (isAIMode ? 'VER MEUS RESULTADOS' : 'TESTAR COM IA')}
           </Button>
         </>
+      ) : (
+        // For regular simulation, show the number selection interface again after result
+        <>
+          <div className="mb-6">
+            <div className="grid grid-cols-5 gap-2">
+              {allNumbers.map((num) => (
+                <NumberButton
+                  key={num}
+                  number={num}
+                  selected={selectedNumbers.includes(num)}
+                  disabled={!selectedNumbers.includes(num) && selectedNumbers.length >= 15}
+                  onClick={() => toggleNumberSelection(num)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <Button
+            onClick={handleCheckResult}
+            disabled={!isSelectionComplete}
+            className="w-full"
+          >
+            VERIFICAR RESULTADO
+          </Button>
+        </>
       )}
 
       {notification.show && (
-        <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-xl border-l-4 border-yellow-500 animate-slideDown z-50 max-w-md">
-          <p className="text-gray-800">{notification.message}</p>
-        </div>
+        <>
+          {/* Background blur overlay */}
+          <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40" />
+          
+          {/* Popup modal */}
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-red-500 w-full max-w-lg h-auto min-h-[40vh] flex flex-col justify-center items-center p-8 animate-scaleIn">
+              <div className="text-6xl mb-6">❌</div>
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-red-600 mb-4">Você teve 10 acertos</h2>
+                <p className="text-lg text-gray-700 mb-6">Não foi dessa vez, tente na próxima rodada!</p>
+              </div>
+            </div>
+          </div>
+        </>
       )}
 
       {showMoneyEffect && (
