@@ -50,7 +50,18 @@ const LotterySimulator: React.FC = () => {
       setShowMoneyEffect(true);
       setTimeout(() => setShowMoneyEffect(false), 3000);
       checkResult();
-      setShowResults(true);
+      
+      // Show success popup for AI mode
+      setNotification({
+        show: true,
+        message: "ai-success"
+      });
+      
+      // Auto advance to next round after showing popup
+      setTimeout(() => {
+        setShowResults(true);
+        setNotification({ show: false, message: '' });
+      }, 3500);
     } else {
       // For regular simulation, show popup and then go to next round
       checkResult();
@@ -272,7 +283,7 @@ const LotterySimulator: React.FC = () => {
               </p>
             ) : (
               <p className="text-lg font-bold text-red-600">
-                ❌ Você teve 10 acertos.
+                ❌ Você teve {matchedNumbers.length} acertos.
                 <br />
                 <span className="text-sm">
                   Não foi dessa vez, tente na próxima rodada!
@@ -323,48 +334,95 @@ const LotterySimulator: React.FC = () => {
           
           {/* Popup modal */}
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-            <div className="bg-gradient-to-br from-white via-red-50 to-red-100 rounded-3xl shadow-2xl border-4 border-red-400 w-full max-w-lg min-h-[45vh] flex flex-col justify-center items-center p-10 animate-scaleIn relative overflow-hidden">
-              {/* Decorative background pattern */}
-              <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-4 left-4 w-8 h-8 bg-red-400 rounded-full"></div>
-                <div className="absolute top-12 right-6 w-6 h-6 bg-red-300 rounded-full"></div>
-                <div className="absolute bottom-8 left-8 w-10 h-10 bg-red-200 rounded-full"></div>
-                <div className="absolute bottom-4 right-4 w-4 h-4 bg-red-400 rounded-full"></div>
-              </div>
-              
-              {/* Content */}
-              <div className="relative z-10 text-center">
-                {/* Icon container */}
-                <div className="mb-8 relative">
-                  <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-4 border-red-300">
-                    <div className="text-6xl">❌</div>
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full animate-bounce"></div>
+            {notification.message === "ai-success" ? (
+              // Success popup for AI mode
+              <div className="bg-gradient-to-br from-white via-green-50 to-green-100 rounded-3xl shadow-2xl border-4 border-green-400 w-full max-w-lg min-h-[45vh] flex flex-col justify-center items-center p-10 animate-scaleIn relative overflow-hidden">
+                {/* Decorative background pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="absolute top-4 left-4 w-8 h-8 bg-green-400 rounded-full"></div>
+                  <div className="absolute top-12 right-6 w-6 h-6 bg-green-300 rounded-full"></div>
+                  <div className="absolute bottom-8 left-8 w-10 h-10 bg-green-200 rounded-full"></div>
+                  <div className="absolute bottom-4 right-4 w-4 h-4 bg-green-400 rounded-full"></div>
                 </div>
                 
-                {/* Text content */}
-                <div className="space-y-4">
-                  <h2 className="text-3xl font-black text-red-700 mb-2 tracking-tight">
-                    Você teve 10 acertos
-                  </h2>
-                  <div className="w-20 h-1 bg-gradient-to-r from-red-400 to-red-600 mx-auto rounded-full mb-4"></div>
-                  <p className="text-xl text-gray-700 font-medium leading-relaxed">
-                    Não foi dessa vez,<br />
-                    <span className="text-red-600 font-semibold">tente na próxima rodada!</span>
-                  </p>
-                </div>
-                
-                {/* Loading indicator */}
-                <div className="mt-8">
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                {/* Content */}
+                <div className="relative z-10 text-center">
+                  {/* Icon container */}
+                  <div className="mb-8 relative">
+                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-4 border-green-300">
+                      <div className="text-6xl">🎉</div>
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full animate-bounce"></div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">Preparando próxima rodada...</p>
+                  
+                  {/* Text content */}
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-black text-green-700 mb-2 tracking-tight">
+                      Parabéns! {matchedNumbers.length} acertos!
+                    </h2>
+                    <div className="w-20 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto rounded-full mb-4"></div>
+                    <p className="text-xl text-gray-700 font-medium leading-relaxed">
+                      A IA LotoSorte funcionou!<br />
+                      <span className="text-green-600 font-semibold">Você ganhou prêmios!</span>
+                    </p>
+                  </div>
+                  
+                  {/* Loading indicator */}
+                  <div className="mt-8">
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-2">Calculando seus ganhos...</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              // Error popup for regular mode
+              <div className="bg-gradient-to-br from-white via-red-50 to-red-100 rounded-3xl shadow-2xl border-4 border-red-400 w-full max-w-lg min-h-[45vh] flex flex-col justify-center items-center p-10 animate-scaleIn relative overflow-hidden">
+                {/* Decorative background pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="absolute top-4 left-4 w-8 h-8 bg-red-400 rounded-full"></div>
+                  <div className="absolute top-12 right-6 w-6 h-6 bg-red-300 rounded-full"></div>
+                  <div className="absolute bottom-8 left-8 w-10 h-10 bg-red-200 rounded-full"></div>
+                  <div className="absolute bottom-4 right-4 w-4 h-4 bg-red-400 rounded-full"></div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10 text-center">
+                  {/* Icon container */}
+                  <div className="mb-8 relative">
+                    <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto shadow-lg border-4 border-red-300">
+                      <div className="text-6xl">❌</div>
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full animate-bounce"></div>
+                  </div>
+                  
+                  {/* Text content */}
+                  <div className="space-y-4">
+                    <h2 className="text-3xl font-black text-red-700 mb-2 tracking-tight">
+                      Você teve {matchedNumbers.length} acertos
+                    </h2>
+                    <div className="w-20 h-1 bg-gradient-to-r from-red-400 to-red-600 mx-auto rounded-full mb-4"></div>
+                    <p className="text-xl text-gray-700 font-medium leading-relaxed">
+                      Não foi dessa vez,<br />
+                      <span className="text-red-600 font-semibold">tente na próxima rodada!</span>
+                    </p>
+                  </div>
+                  
+                  {/* Loading indicator */}
+                  <div className="mt-8">
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-2">Preparando próxima rodada...</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </>
       )}

@@ -120,7 +120,9 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     let matchCount: number;
     
     if (stage === 'regular-simulation') {
-      matchCount = Math.floor(Math.random() * 4) + 8; // 8-11 acertos
+      const possibleMatches = [9, 10, 11];
+      const randomIndex = Math.floor(Math.random() * possibleMatches.length);
+      matchCount = possibleMatches[randomIndex];
     } else {
       // AI mode - guarantee 14 points in at least one round
       if (round === 1 || round === 2) {
