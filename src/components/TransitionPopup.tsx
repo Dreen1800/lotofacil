@@ -6,7 +6,7 @@ const TransitionPopup: React.FC = () => {
   const { setStage } = useGameContext();
 
   const handleContinue = () => {
-    setStage('ai-simulation');
+    setStage('quiz');
   };
 
   return (
@@ -23,7 +23,7 @@ const TransitionPopup: React.FC = () => {
           🍀 Conheça agora a inteligência artificial da LotoSorte!
         </div>
         
-        <p className="text-gray-700 mb-4">
+        <div className="text-gray-700 mb-4">
           <div className="space-y-3 text-left">
             <div className="flex items-center">
               <div className="w-4 h-4 rounded-full mr-3 flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#8f339a' }}>
@@ -56,7 +56,7 @@ const TransitionPopup: React.FC = () => {
               <span>Acertos de 13-14 pontos por semana</span>
             </div>
           </div>
-        </p>
+        </div>
         
         <p className="text-gray-700 mb-6">
           Com a LotoSorte, <span className="font-bold" style={{ color: '#8f339a' }}>+12 mil pessoas</span> já estão faturando mais de <span className="font-bold" style={{ color: '#8f339a' }}>R$3.000</span> todas as semanas!

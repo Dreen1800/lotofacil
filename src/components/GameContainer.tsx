@@ -5,6 +5,8 @@ import TransitionPopup from './TransitionPopup';
 import ResultsSummary from './ResultsSummary';
 import FinalOffer from './FinalOffer';
 import NotificationOverlay from './NotificationOverlay';
+import QuizFlow from './quiz/QuizFlow';
+import QuizLoading from './quiz/QuizLoading';
 import { useGameContext } from '../contexts/GameContext';
 
 const GameContainer: React.FC = () => {
@@ -25,6 +27,10 @@ const GameContainer: React.FC = () => {
 
   const renderCurrentStage = () => {
     switch (stage) {
+      case 'quiz':
+        return <QuizFlow />;
+      case 'quiz-loading':
+        return <QuizLoading />;
       case 'welcome':
         return <WelcomePopup />;
       case 'regular-simulation':

@@ -1,7 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { generateLotteryNumbers, calculateWinnings } from '../utils/lotteryUtils';
 
-export type GameStage = 'welcome' | 'regular-simulation' | 'transition' | 'ai-simulation' | 'results-summary' | 'final-offer';
+export type GameStage = 'quiz' | 'quiz-loading' | 'welcome' | 'regular-simulation' | 'transition' | 'ai-simulation' | 'results-summary' | 'final-offer';
+
+export interface QuizAnswers {
+  question1?: string;
+  question2?: string;
+  question3?: string;
+  question4?: string;
+  question5?: string;
+  question6?: string;
+  question7?: string;
+}
 
 interface GameContextType {
   stage: GameStage;
@@ -17,6 +27,8 @@ interface GameContextType {
     matches: number;
     winnings: number;
   }[];
+  quizAnswers: QuizAnswers;
+  currentQuizStep: number;
   setStage: (stage: GameStage) => void;
   setRound: (round: number) => void;
   addToBalance: (amount: number) => void;
@@ -25,6 +37,8 @@ interface GameContextType {
   resetSelections: () => void;
   resetGame: () => void;
   isAIMode: boolean;
+  setQuizAnswer: (questionKey: keyof QuizAnswers, answer: string) => void;
+  nextQuizStep: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -52,6 +66,8 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [suggestedNumbers, setSuggestedNumbers] = useState<number[]>([]);
   const [roundResults, setRoundResults] = useState<{ round: number; matches: number; winnings: number }[]>([]);
   const [isAIMode, setIsAIMode] = useState(false);
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>({});
+  const [currentQuizStep, setCurrentQuizStep] = useState(1);
 
   useEffect(() => {
     if (stage === 'ai-simulation') {
@@ -171,6 +187,18 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     }
   }, [stage]);
 
+  const setQuizAnswer = (questionKey: keyof QuizAnswers, answer: string) => {
+    setQuizAnswers(prev => ({ ...prev, [questionKey]: answer }));
+  };
+
+  const nextQuizStep = () => {
+    if (currentQuizStep < 7) {
+      setCurrentQuizStep(prev => prev + 1);
+    } else {
+      setStage('quiz-loading');
+    }
+  };
+
   const value = {
     stage,
     round,
@@ -181,6 +209,8 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     matchedNumbers,
     suggestedNumbers,
     roundResults,
+    quizAnswers,
+    currentQuizStep,
     setStage,
     setRound,
     addToBalance,
@@ -188,7 +218,9 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     checkResult,
     resetSelections,
     resetGame,
-    isAIMode
+    isAIMode,
+    setQuizAnswer,
+    nextQuizStep
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
