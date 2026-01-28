@@ -16,7 +16,7 @@ const FinalOffer: React.FC = () => {
     const videoContainer = document.getElementById('video-container');
     if (videoContainer && !videoContainer.querySelector('vturb-smartplayer')) {
       const vturbElement = document.createElement('vturb-smartplayer');
-      vturbElement.setAttribute('id', 'vid-6973b5d81879b712d605f7cf');
+      vturbElement.setAttribute('id', 'vid-69797140ba592bac6100259d');
       vturbElement.style.display = 'block';
       vturbElement.style.margin = '0 auto';
       vturbElement.style.width = '100%';
@@ -27,7 +27,7 @@ const FinalOffer: React.FC = () => {
     // Load the script
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/6973b5d81879b712d605f7cf/v4/player.js';
+    script.src = 'https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/69797140ba592bac6100259d/v4/player.js';
     script.async = true;
     
     script.onload = () => {
