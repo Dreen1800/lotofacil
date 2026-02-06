@@ -158,14 +158,6 @@ const LotterySimulator: React.FC = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-2xl p-6 mx-auto animate-fadeIn">
-      <div className="mb-4 text-center">
-        <img 
-          src="/assets/loto.webp" 
-          alt="Simulador da LotoSorte" 
-          className="w-full mb-2 h-auto rounded-lg"
-        />
-      </div>
-
       <ProgressBar current={round} total={totalRounds} />
 
       <div className="mb-6 flex items-center justify-center">

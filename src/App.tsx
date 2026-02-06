@@ -1,15 +1,15 @@
 import React from 'react';
-import { GameProvider } from './contexts/GameContext';
-import GameContainer from './components/GameContainer';
+import MainFlow from './components/MainFlow';
+import CloakerDebug from './components/CloakerDebug';
 import './index.css';
 
 function App() {
   return (
-    <GameProvider>
-      <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#8f339a' }}>
-        <GameContainer />
-      </div>
-    </GameProvider>
+    <>
+      <MainFlow />
+      {/* CloakerDebug só aparece em desenvolvimento */}
+      {import.meta.env.DEV && <CloakerDebug />}
+    </>
   );
 }
 
