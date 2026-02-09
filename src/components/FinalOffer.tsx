@@ -8,7 +8,7 @@ const FinalOffer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  // Load Vturb SmartPlayer script and element
+  // Load Vturb SmartPlayer script and element (AB Test)
   useEffect(() => {
     if (scriptLoaded.current) return;
     
@@ -16,22 +16,21 @@ const FinalOffer: React.FC = () => {
     const videoContainer = document.getElementById('video-container');
     if (videoContainer && !videoContainer.querySelector('vturb-smartplayer')) {
       const vturbElement = document.createElement('vturb-smartplayer');
-      vturbElement.setAttribute('id', 'vid-69797140ba592bac6100259d');
+      vturbElement.setAttribute('id', 'ab-69892944ba3ea727caf73f37');
       vturbElement.style.display = 'block';
       vturbElement.style.margin = '0 auto';
       vturbElement.style.width = '100%';
-      vturbElement.style.maxWidth = '400px';
       videoContainer.appendChild(vturbElement);
     }
 
     // Load the script
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/players/69797140ba592bac6100259d/v4/player.js';
+    script.src = 'https://scripts.converteai.net/ff9f6de5-a5a0-4221-9188-aae68066cbeb/ab-test/69892944ba3ea727caf73f37/player.js';
     script.async = true;
     
     script.onload = () => {
-      console.log('Vturb SmartPlayer script loaded successfully');
+      console.log('Vturb SmartPlayer (AB Test) script loaded successfully');
       scriptLoaded.current = true;
     };
     
